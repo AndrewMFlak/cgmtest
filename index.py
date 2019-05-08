@@ -71,7 +71,7 @@ provider.add_grant(oauth2.grant.ImplicitGrant(site_adapter=site_adapter))
 
 # Add refresh token capability and set expiration time of access tokens
 # to 30 days
-# provider.add_grant(oauth2.grant.RefreshToken(expires_in=2592000))
+provider.add_grant(oauth2.grant.RefreshToken(expires_in=2592000))
 
 # Wrap the controller with the Wsgi adapter
 app = oauth2.web.wsgi.Application(provider=provider)
