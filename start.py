@@ -79,3 +79,39 @@ app = oauth2.web.wsgi.Application(provider=provider)
 if __name__ == "__main__":
     httpd = make_server('', 8080, app)
     httpd.serve_forever()
+
+# exec(open("./token.py").read())
+#================CLIENT============================>
+
+import http.client
+
+#==========SSL Certificate====================>
+import ssl
+ctx = ssl.create_default_context()
+ctx.check_hostname = False
+ctx.verify_mode = ssl.CERT_NONE
+
+#============================================>
+
+conn = http.client.HTTPSConnection("sandbox-api.dexcom.com")
+
+# payload = "client_id=LzDLAxI7b2vDJSmRYuL8ry0VABo8AAel&redirect_uri=http://localhost/callback&response_type=code&scope=offline_access&state=TEST"
+payload = "/v2/users/self/calibrations?startDate=2017-06-16T08:00:00&endDate=2017-06-17T08:00:00"
+headers = {
+    'content-type': "application/x-www-form-urlencoded",
+    'cache-control': "no-cache"
+    }
+# headers = {
+#     'authorization': "Bearer {your_access_token}",
+#     }
+
+conn.request("GET", "/v2/oauth2/login", payload, headers=headers, context=ctx)
+
+res = conn.getresponse()
+data = res.read()
+
+print(data.decode("utf-8"))
+
+
+
+#==============END==============================>
