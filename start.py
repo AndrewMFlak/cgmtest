@@ -1,3 +1,4 @@
+#=====================OAuth2====================>
 from wsgiref.simple_server import make_server
 import oauth2
 import oauth2.grant
@@ -5,6 +6,19 @@ import oauth2.error
 import oauth2.store.memory
 import oauth2.tokengenerator
 import oauth2.web.wsgi
+
+
+#==========SSL Certificate====================>
+import ssl
+ctx = ssl.create_default_context()
+ctx.check_hostname = False
+ctx.verify_mode = ssl.CERT_NONE
+
+#==================Authorization Id's================>
+CLIENT_ID = "LzDLAxI7b2vDJSmRYuL8ry0VABo8AAel"
+CLIENT_SECRET = "VrzchNFWMq0Cl2mg"
+REDIRECT_URI = "http://localhost/callback"
+
 
 
 # Create a SiteAdapter to interact with the user.
@@ -48,8 +62,8 @@ client_store = oauth2.store.memory.ClientStore()
 # Client ID LzDLAxI7b2vDJSmRYuL8ry0VABo8AAel
 # Client Secret VrzchNFWMq0Cl2mg
 
-client_store.add_client(client_id="LzDLAxI7b2vDJSmRYuL8ry0VABo8AAel", client_secret="VrzchNFWMq0Cl2mg",
-                        redirect_uris=["http://localhost/callback"])
+client_store.add_client(client_id=CLIENT_ID, client_secret=CLIENT_SECRET,
+                        redirect_uris=[REDIRECT_URI])
 
 site_adapter = ExampleSiteAdapter()
 
@@ -81,15 +95,10 @@ if __name__ == "__main__":
     httpd.serve_forever()
 
 # exec(open("./token.py").read())
-#================CLIENT============================>
 
 import http.client
 
-#==========SSL Certificate====================>
-import ssl
-ctx = ssl.create_default_context()
-ctx.check_hostname = False
-ctx.verify_mode = ssl.CERT_NONE
+
 
 #============================================>
 
