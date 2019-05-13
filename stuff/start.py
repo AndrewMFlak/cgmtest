@@ -15,9 +15,9 @@ ctx.check_hostname = False
 ctx.verify_mode = ssl.CERT_NONE
 
 #==================Authorization Id's================>
-CLIENT_ID = "LzDLAxI7b2vDJSmRYuL8ry0VABo8AAel"
-CLIENT_SECRET = "VrzchNFWMq0Cl2mg"
-REDIRECT_URI = "http://localhost/callback"
+CLIENT_ID = LzDLAxI7b2vDJSmRYuL8ry0VABo8AAel
+CLIENT_SECRET = VrzchNFWMq0Cl2mg
+REDIRECT_URI = "http://localhost/8080"
 
 
 
@@ -70,6 +70,7 @@ site_adapter = ExampleSiteAdapter()
 # Create an in-memory storage to store issued tokens.
 # LocalTokenStore can store access and auth tokens
 token_store = oauth2.store.memory.TokenStore()
+print(token_store)
 
 # Create the controller.
 provider = oauth2.Provider(
@@ -124,3 +125,4 @@ print(data.decode("utf-8"))
 
 
 #==============END==============================>
+
